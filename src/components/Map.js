@@ -1,6 +1,7 @@
 import { useState } from "react";
 import GoogleMapReact from "google-map-react";
-import LocationMarker from "./LocationMarker";
+import FireMarker from "./FireMarker";
+import StormMarker from "./StormMarker";
 import LocationInfoBox from "./LocationInfoBox";
 
 const Map = ({ eventData, center, zoom }) => {
@@ -11,10 +12,8 @@ const Map = ({ eventData, center, zoom }) => {
     const lng = e.geometry[0].coordinates[0];
 
     if (e.categories[0].id === "wildfires") {
-      console.log(e.categories[0].id);
-      console.log(`Lat: ${lat}, Lng: ${lng}`);
       return (
-        <LocationMarker
+        <FireMarker
           key={index}
           lat={lat}
           lng={lng}
@@ -25,7 +24,22 @@ const Map = ({ eventData, center, zoom }) => {
               coordinates: [lat, lng],
             })
           }
-        ></LocationMarker>
+        ></FireMarker>
+      );
+    } else if (e.categories[0].id === "severeStorms") {
+      return (
+        <StormMarker
+          key={index}
+          lat={lat}
+          lng={lng}
+          onClick={() =>
+            setLocationInfo({
+              id: e.id,
+              title: e.title,
+              coordinates: [lat, lng],
+            })
+          }
+        ></StormMarker>
       );
     }
     return null;

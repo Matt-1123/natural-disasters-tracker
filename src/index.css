@@ -27,9 +27,14 @@ body {
   position: relative;
 }
 
-.location-icon {
+.fire-icon {
   font-size: 2rem;
   color: red;
+}
+
+.storm-icon {
+  font-size: 2rem;
+  color: #747880;
 }
 
 .loader {
